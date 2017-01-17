@@ -1,0 +1,93 @@
+{% extends "siteframework.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-6">
+		<h3>Create an Account</h3>
+		<form method="post">
+			<table>
+				<tr>
+					<td>
+						Username:
+					</td>
+					<td>
+						<input type="text" name="username" value="{{createUsername}}">
+					</td>
+					<td>
+						{{createUserError}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Password:
+					</td>
+					<td>
+						<input type="password" name="password">
+					</td>
+					<td>
+						{{createPassError}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Verify Password:
+					</td>
+					<td>
+						<input type="password" name="verify">
+					</td>
+					<td>
+						{{createVerifyError}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Email (optional):
+					</td>
+					<td>
+						<input type="text" name="email" value="{{createEmail}}">
+					</td>
+					<td>
+						{{createEmailError}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" name="createSubmit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="col-6">
+		<h3>Already have an account? Sign in.</h3>
+		<form method="post">
+			<table>
+				<tr>
+					<td>
+						Username:
+					</td>
+					<td>
+						<input type="text" name="username" value="{{loginUsername}}">
+					</td>
+					<td>
+						{{loginUserError}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Password:
+					</td>
+					<td>
+						<input type="password" name="password">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" name="loginSubmit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+{% endblock %}

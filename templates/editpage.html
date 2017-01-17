@@ -1,0 +1,55 @@
+{% extends "siteframework.html" %}
+
+{% block content %}
+	<div class="row">
+		{% if post %}
+			<div class="col-12">
+				<h3>Edit a Post</h3>
+				<form method="post">
+					<input type="hidden" name="action" value="Post">
+					<table>
+						<tr>
+							<td>Title</td>
+						</tr>
+						<tr>
+							<td><input type="text" name="title" class="edit-post-title" value="{{post.title}}"></td>
+						</tr>
+						<tr>
+							<td>Content</td>
+						</tr>
+						<tr>
+							<td><textarea name="content" class="edit-post-content">{{post.content}}</textarea></td>
+						</tr>
+						<tr>
+							<td><input type="hidden" name="postId" value="{{post.key().id()}}"><input type="submit"> <a href="/{{post.key().id()}}">Cancel</a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="col-12 right-align">
+				<a href="/delete/{{post.key().id()}}">Delete Post</a>
+			</div>
+		{% elif comment %}
+			<div class="col-12">
+				<h3>Edit a Comment</h3>
+				<form method="post">
+					<input type="hidden" name="action" value="Comment">
+					<table>
+						<tr>
+							<td>Comment</td>
+						</tr>
+						<tr>
+							<td><textarea name="content" class="edit-post-content">{{comment.content}}</textarea></td>
+						</tr>
+						<tr>
+							<td><input type="hidden" name="commentId" value="{{comment.key().id()}}"><input type="submit"> <a href="/{{comment.postedToId}}">Cancel</a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="col-12 right-align">
+				<a href="/delete/{{comment.key().id()}}">Delete Comment</a>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

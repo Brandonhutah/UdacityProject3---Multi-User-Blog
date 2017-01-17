@@ -1,0 +1,47 @@
+{% extends "siteframework.html" %}
+
+{% block content %}
+	<div class="row">
+		{% if not post %}
+			<div class="col-12">
+				<h3>Create a Post</h3>
+				<form method="post">
+					<input type="hidden" name="action" value="Post">
+					<table>
+						<tr>
+							<td>Title</td>
+						</tr>
+						<tr>
+							<td><input type="text" name="title" class="new-post-title"></td>
+						</tr>
+						<tr>
+							<td>Content</td>
+						</tr>
+						<tr>
+							<td><textarea name="content" class="new-post-content"></textarea></td>
+						</tr>
+						<tr>
+							<td><input type="submit"> <a href="/">Cancel</a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		{% else %}
+			<div class="col-12">
+				<h3>Create a Comment for '{{post.title}}'</h3>
+				<form method="post">
+					<input type="hidden" name="action" value="Comment">
+					<input type="hidden" name="postId" value="{{post.key().id()}}">
+					<table>
+						<tr>
+							<td><textarea name="content" class="new-post-content"></textarea></td>
+						</tr>
+						<tr>
+							<td><input type="submit"> <a href="/{{post.key().id()}}">Cancel</a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

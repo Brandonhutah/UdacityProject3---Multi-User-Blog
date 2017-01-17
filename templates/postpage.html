@@ -1,0 +1,32 @@
+{% extends "siteframework.html" %}
+
+{% block content %}
+	<div class="row blog-post">
+		<div class="col-6 blog-title">
+			<h3>{{post.title}}</h3>
+		</div>
+		<div class="col-6 right-align blog-date">
+			<p>By {{post.author}}, {{post.created.strftime('%b %d, %Y')}}</p>
+		</div>
+		<div class="col-12 blog-content">
+			<p>{{post.content}}</p>
+		</div>
+		<div class="col-12 right-align blog-actions">
+			<p>{{post.likes}} Likes {% if user and user.name != post.author %} | <a href="/likePost/{{post.key().id()}}">{% if liked %}Unlike{% else %}Like{% endif %}</a>{% endif %}{% if user.name == post.author %} | <a href="/editpost/{{post.key().id()}}">Edit</a>{% endif %}</p>
+		</div>
+	</div>
+	<hr>
+	<div class="row blog-comments">
+		<div class="col-12 comment-header">
+			<h4>Comments {% if not user %}(<a href="/accountgateway">Sign In</a> to post a comment){% else %} | <a href="/newComment/{{post.key().id()}}">New Comment</a>{% endif %}</h4>
+		</div>
+		<div class="col-12 comments">
+			{% if comments %}
+				{% for comment in comments %}
+					<p>{{comment.content}}</p>
+					By {{comment.author}}, {{comment.created.strftime('%b %d, %Y')}}{% if user and user.name == comment.author %} | <a href="/editComment/{{comment.key().id()}}">Edit</a>{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
